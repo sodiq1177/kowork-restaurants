@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Главная",
+    "restaurants": "Рестораны",
+    "addRestaurant": "Добавить ресторан",
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти",
+    "admin": "Админ панель"
+  },
+  "home": {
+    "title": "Откройте лучшие рестораны Узбекистана",
+    "subtitle": "Находите, оценивайте и делитесь впечатлениями",
+    "searchPlaceholder": "Поиск ресторанов...",
+    "featuredTitle": "Популярные рестораны"
+  },
+  "restaurants": {
+    "title": "Рестораны",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "category": "Категория",
+    "priceLevel": "Ценовая категория",
+    "minRating": "Мин. рейтинг",
+    "noResults": "Рестораны не найдены"
+  },
+  "restaurant": {
+    "details": "Информация",
+    "reviews": "Отзывы",
+    "addReview": "Добавить отзыв",
+    "hours": "Время работы",
+    "phone": "Телефон",
+    "address": "Адрес",
+    "category": "Категория",
+    "price": "Ценовая категория"
+  },
+  "review": {
+    "yourReview": "Ваш отзыв",
+    "rating": "Рейтинг",
+    "comment": "Комментарий",
+    "submit": "Отправить",
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+  "auth": {
+    "loginTitle": "Вход",
+    "registerTitle": "Регистрация",
+    "email": "Email",
+    "password": "Пароль",
+    "name": "Имя",
+    "submit": "Отправить",
+    "alreadyHaveAccount": "Уже есть аккаунт?",
+    "dontHaveAccount": "Нет аккаунта?"
+  },
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отменить",
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "loading": "Загрузка...",
+    "error": "Произошла ошибка"
+  }
+}

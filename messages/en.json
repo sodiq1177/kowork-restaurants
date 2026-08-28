@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Home",
+    "restaurants": "Restaurants",
+    "addRestaurant": "Add Restaurant",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "admin": "Admin Panel"
+  },
+  "home": {
+    "title": "Discover Best Restaurants in Uzbekistan",
+    "subtitle": "Find, review, and share your dining experiences",
+    "searchPlaceholder": "Search restaurants...",
+    "featuredTitle": "Featured Restaurants"
+  },
+  "restaurants": {
+    "title": "Restaurants",
+    "search": "Search",
+    "filter": "Filter",
+    "category": "Category",
+    "priceLevel": "Price Level",
+    "minRating": "Min Rating",
+    "noResults": "No restaurants found"
+  },
+  "restaurant": {
+    "details": "Details",
+    "reviews": "Reviews",
+    "addReview": "Add Review",
+    "hours": "Opening Hours",
+    "phone": "Phone",
+    "address": "Address",
+    "category": "Category",
+    "price": "Price Level"
+  },
+  "review": {
+    "yourReview": "Your Review",
+    "rating": "Rating",
+    "comment": "Comment",
+    "submit": "Submit Review",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "submit": "Submit",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "loading": "Loading...",
+    "error": "Error occurred"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "restaurants": "Restoranlar",
+    "addRestaurant": "Restoran qo'shish",
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "logout": "Chiqish",
+    "admin": "Admin panel"
+  },
+  "home": {
+    "title": "O'zbekistondagi eng yaxshi restoranlarni toping",
+    "subtitle": "Restoranlarni toping, baholang va tajribangizni ulashing",
+    "searchPlaceholder": "Restoran qidirish...",
+    "featuredTitle": "Mashhur restoranlar"
+  },
+  "restaurants": {
+    "title": "Restoranlar",
+    "search": "Qidirish",
+    "filter": "Filter",
+    "category": "Kategoriya",
+    "priceLevel": "Narx darajasi",
+    "minRating": "Minimal reyting",
+    "noResults": "Restoran topilmadi"
+  },
+  "restaurant": {
+    "details": "Ma'lumotlar",
+    "reviews": "Sharhlar",
+    "addReview": "Sharh qo'shish",
+    "hours": "Ish vaqti",
+    "phone": "Telefon",
+    "address": "Manzil",
+    "category": "Kategoriya",
+    "price": "Narx darajasi"
+  },
+  "review": {
+    "yourReview": "Sizning sharhingiz",
+    "rating": "Reyting",
+    "comment": "Izoh",
+    "submit": "Yuborish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish"
+  },
+  "auth": {
+    "loginTitle": "Kirish",
+    "registerTitle": "Ro'yxatdan o'tish",
+    "email": "Email",
+    "password": "Parol",
+    "name": "Ism",
+    "submit": "Yuborish",
+    "alreadyHaveAccount": "Akkountingiz bormi?",
+    "dontHaveAccount": "Akkountingiz yo'qmi?"
+  },
+  "common": {
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "edit": "Tahrirlash",
+    "delete": "O'chirish",
+    "loading": "Yuklanmoqda...",
+    "error": "Xatolik yuz berdi"
+  }
+}

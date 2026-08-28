@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "restaurants": "レストラン",
+    "addRestaurant": "レストランを追加",
+    "login": "ログイン",
+    "register": "登録",
+    "logout": "ログアウト",
+    "admin": "管理者パネル"
+  },
+  "home": {
+    "title": "ウズベキスタンの最高のレストランを見つけよう",
+    "subtitle": "レストランを見つけ、評価し、体験を共有しましょう",
+    "searchPlaceholder": "レストランを検索...",
+    "featuredTitle": "おすすめレストラン"
+  },
+  "restaurants": {
+    "title": "レストラン",
+    "search": "検索",
+    "filter": "フィルター",
+    "category": "カテゴリー",
+    "priceLevel": "価格帯",
+    "minRating": "最低評価",
+    "noResults": "レストランが見つかりません"
+  },
+  "restaurant": {
+    "details": "詳細",
+    "reviews": "レビュー",
+    "addReview": "レビューを追加",
+    "hours": "営業時間",
+    "phone": "電話番号",
+    "address": "住所",
+    "category": "カテゴリー",
+    "price": "価格帯"
+  },
+  "review": {
+    "yourReview": "あなたのレビュー",
+    "rating": "評価",
+    "comment": "コメント",
+    "submit": "送信",
+    "edit": "編集",
+    "delete": "削除"
+  },
+  "auth": {
+    "loginTitle": "ログイン",
+    "registerTitle": "登録",
+    "email": "メール",
+    "password": "パスワード",
+    "name": "名前",
+    "submit": "送信",
+    "alreadyHaveAccount": "アカウントをお持ちですか？",
+    "dontHaveAccount": "アカウントをお持ちでないですか？"
+  },
+  "common": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "edit": "編集",
+    "delete": "削除",
+    "loading": "読み込み中...",
+    "error": "エラーが発生しました"
+  }
+}

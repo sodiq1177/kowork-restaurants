@@ -1,37 +1,25 @@
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-
-// Fix for default marker icon
-const icon = L.icon({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-});
 
 interface MapComponentProps {
   lat: number;
   lng: number;
+  title?: string;
 }
 
-export default function MapComponent({ lat, lng }: MapComponentProps) {
+export default function MapComponent({
+  lat,
+  lng,
+  title = "Restaurant Location",
+}: MapComponentProps) {
   return (
-    <MapContainer
-      center={[lat, lng]}
-      zoom={15}
-      style={{ height: "400px", width: "100%", borderRadius: "8px" }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={[lat, lng]} icon={icon}>
-        <Popup>Restaurant Location</Popup>
-      </Marker>
-    </MapContainer>
+    <iframe
+      title={title}
+      src={`https://www.openstreetmap.org/export/embed.html?bbox=${lng - 0.01}%2C${lat - 0.01}%2C${lng + 0.01}%2C${lat + 0.01}&layer=mapnik&marker=${lat}%2C${lng}`}
+      className="w-full rounded-lg border-0"
+      style={{ height: "400px" }}
+      loading="lazy"
+    />
   );
 }
+

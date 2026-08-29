@@ -3,13 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
-}
-
-enum Role {
-  USER
-  ADMIN
 }
 
 model User {
@@ -19,14 +14,16 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  role          Role      @default(USER)
+  role          String    @default("USER")
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  accounts    Account[]
-  sessions    Session[]
-  restaurants Restaurant[]
-  reviews     Review[]
+  accounts          Account[]
+  sessions          Session[]
+  restaurants       Restaurant[]
+  reviews           Review[]
+  favorites         Favorite[]
+  reviewHelpfulVotes ReviewHelpfulVote[]
 }
 
 model Account {
@@ -35,12 +32,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -64,22 +61,15 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-enum PriceLevel {
-  BUDGET      // $
-  MODERATE    // $$
-  EXPENSIVE   // $$$
-  LUXURY      // $$$$
-}
-
 model Restaurant {
   id          String     @id @default(cuid())
   name        String
-  description String?    @db.Text
+  description String?
   category    String
   address     String
   phone       String?
   openingHours String?
-  priceLevel  PriceLevel @default(MODERATE)
+  priceLevel  String     @default("MODERATE")
   latitude    Float?
   longitude   Float?
   avgRating   Float      @default(0)
@@ -90,8 +80,9 @@ model Restaurant {
   createdById String
   createdBy   User   @relation(fields: [createdById], references: [id])
 
-  images  RestaurantImage[]
-  reviews Review[]
+  images    RestaurantImage[]
+  reviews   Review[]
+  favorites Favorite[]
 }
 
 model RestaurantImage {
@@ -106,8 +97,10 @@ model RestaurantImage {
 
 model Review {
   id           String   @id @default(cuid())
-  rating       Int      // 1-5
-  comment      String?  @db.Text
+  title        String?
+  rating       Int
+  comment      String?
+  helpfulCount Int      @default(0)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -117,7 +110,8 @@ model Review {
   restaurantId String
   restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
 
-  images ReviewImage[]
+  images             ReviewImage[]
+  helpfulVotes       ReviewHelpfulVote[]
 }
 
 model ReviewImage {
@@ -128,4 +122,31 @@ model ReviewImage {
   createdAt DateTime @default(now())
 
   review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  id           String     @id @default(cuid())
+  userId       String
+  restaurantId String
+  createdAt    DateTime   @default(now())
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  restaurant Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, restaurantId])
+  @@index([userId])
+  @@index([restaurantId])
+}
+
+model ReviewHelpfulVote {
+  id        String   @id @default(cuid())
+  userId    String
+  reviewId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, reviewId])
+  @@index([reviewId])
 }

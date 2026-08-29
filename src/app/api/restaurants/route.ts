@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { z } from "zod";
@@ -13,6 +14,7 @@ const createSchema = z.object({
   priceLevel: z.enum(["BUDGET", "MODERATE", "EXPENSIVE", "LUXURY"]).optional(),
   latitude: z.number().optional(),
   longitude: z.number().optional(),
+  imageUrl: z.string().optional(),
 });
 
 export async function GET(req: NextRequest) {
@@ -24,8 +26,8 @@ export async function GET(req: NextRequest) {
   const page = parseInt(searchParams.get("page") || "1");
   const limit = 12;
 
-  const where: any = {};
-  if (q) where.name = { contains: q, mode: "insensitive" };
+  const where: Prisma.RestaurantWhereInput = {};
+  if (q) where.name = { contains: q };
   if (category) where.category = category;
   if (minRating > 0) where.avgRating = { gte: minRating };
   if (priceLevel) where.priceLevel = priceLevel;
@@ -60,10 +62,17 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
     }
 
+    const { imageUrl, ...restData } = parsed.data;
+
     const restaurant = await prisma.restaurant.create({
       data: {
-        ...parsed.data,
+        ...restData,
         createdById: session.user.id!,
+        images: imageUrl?.trim()
+          ? {
+              create: [{ url: imageUrl.trim() }],
+            }
+          : undefined,
       },
       include: { images: true },
     });

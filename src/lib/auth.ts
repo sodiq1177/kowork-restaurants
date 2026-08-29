@@ -20,14 +20,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = (user as any).role;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id as string;
-        (session.user as any).role = token.role;
+        session.user.id = (token.id as string) || "";
+        session.user.role = (token.role as string) || "USER";
       }
       return session;
     },
@@ -38,9 +38,15 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const parsed = loginSchema.safeParse(credentials);
         if (!parsed.success) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: parsed.data.email },
-        });
+        let user;
+        try {
+          user = await prisma.user.findUnique({
+            where: { email: parsed.data.email.trim().toLowerCase() },
+          });
+        } catch (error) {
+          console.error("Login database error:", error);
+          throw new Error("Database unavailable");
+        }
 
         if (!user || !user.password) return null;
 

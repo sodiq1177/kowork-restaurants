@@ -2,7 +2,10 @@
   "nav": {
     "home": "Главная",
     "restaurants": "Рестораны",
+    "nearby": "Рядом",
+    "favorites": "Избранное",
     "addRestaurant": "Добавить ресторан",
+    "profile": "Профиль",
     "login": "Войти",
     "register": "Регистрация",
     "logout": "Выйти",
@@ -58,5 +61,22 @@
     "delete": "Удалить",
     "loading": "Загрузка...",
     "error": "Произошла ошибка"
+  },
+  "profile": {
+    "title": "Профиль",
+    "restaurantsCount": "ресторанов",
+    "reviewsCount": "отзывов",
+    "favoritesCount": "избранных",
+    "myRestaurants": "Мои Рестораны",
+    "myReviews": "Мои Отзывы",
+    "myFavorites": "Мои Избранные",
+    "noRestaurants": "Пока нет ресторанов",
+    "noReviews": "Пока нет отзывов",
+    "noFavorites": "Пока нет избранных"
+  },
+  "favorites": {
+    "title": "Мои Избранные",
+    "empty": "Пока нет избранных ресторанов",
+    "exploreRestaurants": "Смотреть Рестораны"
   }
 }

@@ -2,7 +2,10 @@
   "nav": {
     "home": "Bosh sahifa",
     "restaurants": "Restoranlar",
+    "nearby": "Yaqin-atrofda",
+    "favorites": "Sevimlilar",
     "addRestaurant": "Restoran qo'shish",
+    "profile": "Profil",
     "login": "Kirish",
     "register": "Ro'yxatdan o'tish",
     "logout": "Chiqish",
@@ -58,5 +61,22 @@
     "delete": "O'chirish",
     "loading": "Yuklanmoqda...",
     "error": "Xatolik yuz berdi"
+  },
+  "profile": {
+    "title": "Profil",
+    "restaurantsCount": "restoranlar",
+    "reviewsCount": "sharhlar",
+    "favoritesCount": "sevimlilar",
+    "myRestaurants": "Mening Restoranlarim",
+    "myReviews": "Mening Sharhlarim",
+    "myFavorites": "Mening Sevimlilarim",
+    "noRestaurants": "Hali restoranlar yo'q",
+    "noReviews": "Hali sharhlar yo'q",
+    "noFavorites": "Hali sevimlilar yo'q"
+  },
+  "favorites": {
+    "title": "Mening Sevimlilarim",
+    "empty": "Hali sevimli restoranlar yo'q",
+    "exploreRestaurants": "Restoranlarni Ko'rish"
   }
 }

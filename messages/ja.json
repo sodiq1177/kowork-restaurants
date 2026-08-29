@@ -2,7 +2,10 @@
   "nav": {
     "home": "ホーム",
     "restaurants": "レストラン",
+    "nearby": "周辺検索",
+    "favorites": "お気に入り",
     "addRestaurant": "レストランを追加",
+    "profile": "プロフィール",
     "login": "ログイン",
     "register": "登録",
     "logout": "ログアウト",
@@ -58,5 +61,22 @@
     "delete": "削除",
     "loading": "読み込み中...",
     "error": "エラーが発生しました"
+  },
+  "profile": {
+    "title": "プロフィール",
+    "restaurantsCount": "レストラン",
+    "reviewsCount": "レビュー",
+    "favoritesCount": "お気に入り",
+    "myRestaurants": "マイレストラン",
+    "myReviews": "マイレビュー",
+    "myFavorites": "お気に入り",
+    "noRestaurants": "レストランがありません",
+    "noReviews": "レビューがありません",
+    "noFavorites": "お気に入りがありません"
+  },
+  "favorites": {
+    "title": "お気に入り",
+    "empty": "お気に入りのレストランがありません",
+    "exploreRestaurants": "レストランを見る"
   }
 }

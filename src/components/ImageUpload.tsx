@@ -11,8 +11,10 @@ export default function ImageUpload({ onUpload }: ImageUploadProps) {
   return (
     <CldUploadWidget
       uploadPreset="ml_default"
-      onSuccess={(result: any) => {
-        onUpload(result.info.secure_url);
+      onSuccess={(result) => {
+        if (typeof result?.info === "object" && result?.info && "secure_url" in result.info) {
+          onUpload((result.info as { secure_url: string }).secure_url);
+        }
       }}
     >
       {({ open }) => (

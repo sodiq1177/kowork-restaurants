@@ -2,7 +2,10 @@
   "nav": {
     "home": "Home",
     "restaurants": "Restaurants",
+    "nearby": "Nearby",
+    "favorites": "Favorites",
     "addRestaurant": "Add Restaurant",
+    "profile": "Profile",
     "login": "Login",
     "register": "Register",
     "logout": "Logout",
@@ -58,5 +61,22 @@
     "delete": "Delete",
     "loading": "Loading...",
     "error": "Error occurred"
+  },
+  "profile": {
+    "title": "Profile",
+    "restaurantsCount": "restaurants",
+    "reviewsCount": "reviews",
+    "favoritesCount": "favorites",
+    "myRestaurants": "My Restaurants",
+    "myReviews": "My Reviews",
+    "myFavorites": "My Favorites",
+    "noRestaurants": "No restaurants yet",
+    "noReviews": "No reviews yet",
+    "noFavorites": "No favorites yet"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "empty": "No favorite restaurants yet",
+    "exploreRestaurants": "Explore Restaurants"
   }
 }

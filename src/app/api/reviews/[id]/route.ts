@@ -4,24 +4,32 @@ import { auth } from "@/lib/auth";
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const { id } = await params;
   const body = await req.json();
   const review = await prisma.review.findUnique({
-    where: { id: params.id },
+    where: { id },
   });
 
-  if (review?.userId !== session.user.id) {
+  if (!review) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  const isAllowed =
+    review.userId === session.user.id || session.user.role === "ADMIN";
+
+  if (!isAllowed) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
   const updated = await prisma.review.update({
-    where: { id: params.id },
+    where: { id },
     data: body,
   });
 
@@ -30,25 +38,32 @@ export async function PATCH(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
   if (!session?.user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  const { id } = await params;
   const review = await prisma.review.findUnique({
-    where: { id: params.id },
+    where: { id },
     select: { userId: true, restaurantId: true },
   });
 
-  if (review?.userId !== session.user.id) {
+  if (!review) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  const isAllowed =
+    review.userId === session.user.id || session.user.role === "ADMIN";
+
+  if (!isAllowed) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
-  await prisma.review.delete({ where: { id: params.id } });
+  await prisma.review.delete({ where: { id } });
 
-  // Update restaurant rating
   const reviews = await prisma.review.findMany({
     where: { restaurantId: review.restaurantId },
     select: { rating: true },

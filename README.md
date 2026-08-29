@@ -1,122 +1,111 @@
 # CoWork - Restaurant Review Website
 
-**飲食店情報口コミサイト (Restaurant Review Website)**
-
-A multilingual restaurant review platform for discovering and reviewing restaurants in Uzbekistan.
+A multilingual restaurant review platform for discovering, rating, and managing restaurants in Uzbekistan.
 
 ## Features
 
-- 🔐 **Authentication** - Register, login, logout with NextAuth.js
-- 🍽️ **Restaurant CRUD** - Create, read, update, delete restaurants
-- 🔍 **Search & Filter** - By name, category, rating, price level
-- ⭐ **Review System** - Rate and review restaurants (1-5 stars)
-- 🌍 **Multilingual** - English, O'zbek, Русский, 日本語
-- 🗺️ **Interactive Maps** - Leaflet + OpenStreetMap integration
-- 📸 **Image Upload** - Cloudinary integration
-- 👑 **Admin Panel** - Manage users, restaurants, and reviews
+- 🔐 Authentication with NextAuth credentials login/register
+- 🍽️ Restaurant creation, listing, detail page, deletion, and owner-only edit logic
+- 🔍 Search by text, category, address, and rating filters
+- ⭐ Review creation and rating system
+- 🌍 4-language interface: English, Uzbek, Russian, Japanese
+- 🗺️ OpenStreetMap-based nearby search and coordinates on the map
+- 📸 Restaurant image support
+- 👑 Admin panel for user and restaurant management
+- ❤️ Favorites and nearby restaurant discovery
 
 ## Tech Stack
 
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Database:** PostgreSQL
-- **ORM:** Prisma
-- **Authentication:** Auth.js (NextAuth v5)
-- **i18n:** next-intl
-- **Maps:** Leaflet + React Leaflet
-- **Image Upload:** Cloudinary
-- **Form Validation:** Zod + React Hook Form
-- **Icons:** Lucide React
+- Framework: Next.js 16 (App Router)
+- Language: TypeScript
+- Styling: Tailwind CSS
+- Database: SQLite (Prisma)
+- Authentication: Auth.js (NextAuth v5)
+- i18n: next-intl
+- Maps: OpenStreetMap + Yandex-compatible geocoding utilities
+- Image hosting: Cloudinary-ready
+- Validation: Zod
 
 ## Setup
 
-### 1. Install Dependencies
+### 1. Install dependencies
 
 ```bash
-pnpm install
+npm install
 ```
 
-### 2. Setup Environment Variables
+### 2. Configure environment variables
 
-Copy `.env.example` to `.env` and configure:
+Copy `.env.example` to `.env` and update the values as needed:
 
 ```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/kowork_db"
+DATABASE_URL="file:./dev.db"
 AUTH_SECRET="your-secret-key"
 AUTH_URL="http://localhost:3000"
 NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
+NEXT_PUBLIC_YANDEX_MAPS_API_KEY="your-yandex-key"
 ```
 
-### 3. Setup Database
+### 3. Initialize the database
 
 ```bash
-pnpm db:push
+npx prisma db push
 ```
 
-### 4. Run Development Server
+### 4. Run the app
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open http://localhost:3000
+
+## Notes
+
+- The project uses SQLite for local development and Prisma migrations.
+- Nearby and address search rely on OpenStreetMap Overpass/Nominatim endpoints.
+- Image uploads are supported through Cloudinary, but the app still works without a live upload key for basic browsing and review flows.
+- If a stale `.next` cache causes type-checking issues, clear it with:
+
+```bash
+rm -rf .next
+npx next build
+```
 
 ## Project Structure
 
-```
+```text
 src/
 ├── app/
-│   ├── [locale]/           # Internationalized routes
-│   │   ├── page.tsx        # Homepage
-│   │   ├── restaurants/    # Restaurant pages
-│   │   ├── login/          # Login page
-│   │   └── register/       # Register page
-│   └── api/                # API routes
-│       ├── auth/           # Authentication
-│       ├── restaurants/    # Restaurant CRUD
-│       └── reviews/        # Review CRUD
-├── components/             # React components
-├── lib/                    # Utilities (Prisma, Auth)
-└── i18n/                   # Internationalization config
-
-messages/                   # Translation files
-prisma/                     # Database schema
+│   ├── [locale]/
+│   ├── api/
+│   └── globals.css
+├── components/
+├── lib/
+├── i18n/
+├── proxy.ts
+└──
+messages/
+prisma/
+public/
 ```
 
 ## Available Languages
 
-- 🇬🇧 English (`/en`)
-- 🇺🇿 O'zbekcha (`/uz`)
-- 🇷🇺 Русский (`/ru`)
-- 🇯🇵 日本語 (`/ja`)
+- English (`/en`)
+- O'zbek (`/uz`)
+- Русский (`/ru`)
+- 日本語 (`/ja`)
 
-## Demo Features
+## Verification
 
-1. **Homepage** - Hero section with search
-2. **Restaurant List** - Search, filter by category/rating/price
-3. **Restaurant Detail** - Info, images, map, reviews
-4. **Add Review** - Rate 1-5 stars with comment
-5. **Authentication** - Register and login
-6. **Admin Panel** - Manage content
-7. **Multilingual** - Switch between 4 languages
+The project has been verified with:
 
-## License
+```bash
+npx next build
+npx prisma db push
+```
 
-MIT
-
-## CoWork Project Deliverables
-
-- ① 企画書 (Project Proposal)
-- ② 設計書 (Design Document)
-- ③ 作業スケジュール (Work Schedule)
-- ④ ソースコード (Source Code)
-- ⑤ デモサイトURL (Demo Site URL)
-- ⑥ テスト仕様書 (Test Specification)
-- ⑦ 作業報告書 (Work Report)
-- ⑧ プレゼンテーション資料 (Presentation)
-
-**Deadline:** August 31, 2026 14:00
-**Presentation:** September 2026 (Week 1)
+Both commands succeed in the current project state.

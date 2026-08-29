@@ -5,6 +5,7 @@ import { z } from "zod";
 
 const reviewSchema = z.object({
   restaurantId: z.string(),
+  title: z.string().optional(),
   rating: z.number().min(1).max(5),
   comment: z.string().optional(),
 });
@@ -20,6 +21,26 @@ export async function POST(req: NextRequest) {
     const parsed = reviewSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+    }
+
+    // Check if user is the owner of the restaurant
+    const restaurant = await prisma.restaurant.findUnique({
+      where: { id: parsed.data.restaurantId },
+      select: { createdById: true },
+    });
+
+    if (!restaurant) {
+      return NextResponse.json(
+        { error: "Restaurant not found" },
+        { status: 404 }
+      );
+    }
+
+    if (restaurant.createdById === session.user.id) {
+      return NextResponse.json(
+        { error: "You cannot review your own restaurant" },
+        { status: 403 }
+      );
     }
 
     const review = await prisma.review.create({

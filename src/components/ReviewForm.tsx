@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Send } from "lucide-react";
 
 interface ReviewFormProps {
   restaurantId: string;
@@ -18,7 +18,7 @@ export default function ReviewForm({ restaurantId, onSuccess }: ReviewFormProps)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (rating === 0) {
-      setError("Please select a rating");
+      setError("Iltimos, yulduzcha orqali baho bering (1-5)");
       return;
     }
 
@@ -34,7 +34,7 @@ export default function ReviewForm({ restaurantId, onSuccess }: ReviewFormProps)
 
       if (!res.ok) {
         const data = await res.json();
-        setError(data.error || "Failed to submit review");
+        setError(data.error || "Fikr qoldirishda xatolik yuz berdi");
         return;
       }
 
@@ -42,25 +42,29 @@ export default function ReviewForm({ restaurantId, onSuccess }: ReviewFormProps)
       setComment("");
       onSuccess();
     } catch {
-      setError("An error occurred");
+      setError("Server bilan bog'lanishda xatolik yuz berdi");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow mb-6">
-      <h3 className="text-xl font-semibold mb-4">Write a Review</h3>
+    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+      <h3 className="text-lg font-black text-slate-900 mb-4">
+        Restoranga baho va sharh qoldiring
+      </h3>
 
       {error && (
-        <div className="bg-red-50 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold mb-4">
           {error}
         </div>
       )}
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">Rating</label>
-        <div className="flex gap-2">
+        <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+          Bahoyingiz *
+        </label>
+        <div className="flex gap-2 items-center">
           {[1, 2, 3, 4, 5].map((star) => (
             <button
               key={star}
@@ -68,41 +72,55 @@ export default function ReviewForm({ restaurantId, onSuccess }: ReviewFormProps)
               onClick={() => setRating(star)}
               onMouseEnter={() => setHoveredRating(star)}
               onMouseLeave={() => setHoveredRating(0)}
-              className="focus:outline-none"
+              className="focus:outline-none transition hover:scale-110 cursor-pointer"
             >
               <Star
-                size={32}
+                size={30}
                 className={
                   star <= (hoveredRating || rating)
-                    ? "text-yellow-400 fill-yellow-400"
-                    : "text-gray-300"
+                    ? "text-amber-400 fill-amber-400"
+                    : "text-slate-200 hover:text-amber-200"
                 }
               />
             </button>
           ))}
+          {rating > 0 && (
+            <span className="text-xs font-bold text-slate-700 ml-2">
+              {rating === 5
+                ? "A'lo darajada! 🌟"
+                : rating === 4
+                ? "Juda yaxshi 👍"
+                : rating === 3
+                ? "O'rtacha 🙂"
+                : rating === 2
+                ? "Qoniqarsiz 🙁"
+                : "Yomon ❌"}
+            </span>
+          )}
         </div>
       </div>
 
       <div className="mb-4">
-        <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-2">
-          Comment
+        <label htmlFor="comment" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+          Fikr va taassurotlaringiz
         </label>
         <textarea
           id="comment"
-          rows={4}
+          rows={3}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
-          placeholder="Share your experience..."
+          className="w-full bg-slate-50 text-slate-900 px-4 py-3 border border-slate-200 rounded-xl focus:bg-white focus:border-orange-500 focus:outline-none transition text-sm font-medium"
+          placeholder="Taomlar sifati, xizmat ko'rsatish va muhit haqida yozing..."
         />
       </div>
 
       <button
         type="submit"
         disabled={loading || rating === 0}
-        className="w-full bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 disabled:opacity-50 font-semibold"
+        className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white font-bold text-sm rounded-xl shadow-md shadow-orange-500/20 hover:shadow-orange-500/30 transition disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
       >
-        {loading ? "Submitting..." : "Submit Review"}
+        <Send size={16} />
+        <span>{loading ? "Yuborilmoqda..." : "Fikrni Yuborish"}</span>
       </button>
     </form>
   );
